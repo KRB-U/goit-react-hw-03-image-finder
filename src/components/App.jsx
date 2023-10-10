@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { ModalWindow } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 
 export class App extends Component {
   state = {
@@ -19,7 +20,10 @@ export class App extends Component {
       <div>
         {/* Компонент приймає один проп onSubmit – функцію для передачі значення інпута під час сабміту форми */}
         <Searchbar onSubmit={{}}></Searchbar>
-        {showModal && <ModalWindow></ModalWindow>}
+        <button type="button" onClick={this.togleModal}>
+          Open
+        </button>
+        {showModal && <ModalWindow>{ImageGallery}</ModalWindow>}
       </div>
     );
   }
