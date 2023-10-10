@@ -2,6 +2,21 @@ import { Component } from 'react';
 import { ModalWindow } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
+
+// componentDidMount(){
+// window.addEventListener('keydown', this.handleKeyDown);
+// }
+
+// componentWillUnmount() {
+//   window.removeEventListener('keydown', this.handleKeyDown);
+// }
+
+// handleKeyDown = (evt) => {
+// if (evt.code === 'ESCAPE') {
+//     this.pros.togleModal();
+//   }
+// }
 
 export class App extends Component {
   state = {
@@ -23,7 +38,8 @@ export class App extends Component {
         <button type="button" onClick={this.togleModal}>
           Open
         </button>
-        {showModal && <ModalWindow>{ImageGallery}</ModalWindow>}
+        <ImageGalleryItem></ImageGalleryItem>
+        {showModal && <ModalWindow></ModalWindow>}
       </div>
     );
   }
