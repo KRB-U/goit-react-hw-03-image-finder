@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { ModalWindow } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
+
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 
