@@ -1,9 +1,16 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { Component } from 'react';
 
-export const ImageGallery = () => {
-  return (
-    <ul className="gallery">
-      <ImageGalleryItem></ImageGalleryItem>
-    </ul>
-  );
-};
+class ImageGallery extends Component {
+  render() {
+    console.log(this.props.searchQuery);
+
+    return (
+      <ul className="gallery">
+        <ImageGalleryItem></ImageGalleryItem>
+      </ul>
+    );
+  }
+}
+
+export { ImageGallery };
