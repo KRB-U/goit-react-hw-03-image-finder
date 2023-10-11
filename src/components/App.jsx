@@ -1,9 +1,8 @@
 import { Component } from 'react';
-import { ModalWindow } from './Modal/Modal';
+import { ModalFrame } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
 
 import { ImageGallery } from './ImageGallery/ImageGallery';
-import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 
 export class App extends Component {
   state = {
@@ -55,8 +54,8 @@ export class App extends Component {
         <button type="button" onClick={this.togleModal}>
           Open
         </button>
-        <ImageGalleryItem></ImageGalleryItem>
-        {showModal && <ModalWindow></ModalWindow>}
+        <ImageGallery></ImageGallery>
+        {showModal && <ModalFrame></ModalFrame>}
       </div>
     );
   }

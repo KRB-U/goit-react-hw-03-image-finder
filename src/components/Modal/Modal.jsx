@@ -14,7 +14,7 @@ import { Overlay, ImageContainer } from './Modal.styled';
 
 Modal.setAppElement('#root');
 
-export const ModalWindow = () => {
+export const ModalFrame = () => {
   return (
     <Modal
       isOpen={true}
@@ -25,7 +25,7 @@ export const ModalWindow = () => {
     >
       <Overlay>
         <ImageContainer>
-          {/* {this.props.children} */}
+          {/* {children} */}
           <img src="" alt="" />
         </ImageContainer>
       </Overlay>
