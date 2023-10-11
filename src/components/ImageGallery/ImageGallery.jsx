@@ -7,6 +7,9 @@ class ImageGallery extends Component {
 
     return (
       <ul className="gallery">
+        {/* {searchQuery.map((item, idx) => {
+          <ImageGalleryItem key={item.id} webformatURL={item.webformatURL} />;
+        })} */}
         <ImageGalleryItem></ImageGalleryItem>
       </ul>
     );
