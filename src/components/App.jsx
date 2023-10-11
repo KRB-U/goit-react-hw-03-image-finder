@@ -5,26 +5,42 @@ import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 
-// componentDidMount(){
-// window.addEventListener('keydown', this.handleKeyDown);
-// }
-
-// componentWillUnmount() {
-//   window.removeEventListener('keydown', this.handleKeyDown);
-// }
-
-// handleKeyDown = (evt) => {
-// if (evt.code === 'ESCAPE') {
-//     this.pros.togleModal();
-//   }
-// }
-
 export class App extends Component {
   state = {
     showModal: false,
   };
 
-  togleModal = () => {
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+    this.toggleModal();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleBackDropClick = evt => {
+    if (evt.currnetTarget === evt.target) {
+      this.toggleModal();
+    }
+  };
+
+  handleSubmit = evt => {
+    evt.preventDefault();
+  };
+
+  handleKeyDown = evt => {
+    if (evt.code === 'Escape') {
+      this.toggleModal();
+    }
+  };
+
+  //пишу в state value із інпута Search, тре на бекенд
+  setSearchToState = value => {
+    this.setState({ search: value });
+  };
+
+  toggleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
     }));

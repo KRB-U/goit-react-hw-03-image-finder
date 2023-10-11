@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { Overlay, ModalWin } from './Modal.styled';
+import { Overlay, ImageContainer } from './Modal.styled';
 
 // const customStyles = {
 //   content: {
@@ -24,10 +24,10 @@ export const ModalWindow = () => {
       contentLabel="Example Modal"
     >
       <Overlay>
-        <ModalWin>
+        <ImageContainer>
           {/* {this.props.children} */}
           <img src="" alt="" />
-        </ModalWin>
+        </ImageContainer>
       </Overlay>
     </Modal>
   );

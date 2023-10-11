@@ -13,9 +13,9 @@ const Overlay = styled.div`
   z-index: 1200;
 `;
 
-const ModalWin = styled.div`
+const ImageContainer = styled.div`
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 24px);
 `;
 
-export { Overlay, ModalWin };
+export { Overlay, ImageContainer };
