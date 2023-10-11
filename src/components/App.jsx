@@ -56,7 +56,9 @@ export class App extends Component {
           Open
         </button>
         {/* завершив на передачі шуканого із state в ImageGallery */}
+
         <ImageGallery searchQuery={this.state.queryValue}></ImageGallery>
+
         {showModal && <ModalFrame></ModalFrame>}
         <NotificationContainer />
       </div>
