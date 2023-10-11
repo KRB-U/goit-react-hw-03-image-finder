@@ -1,4 +1,4 @@
-//завершив на передачі шуканого із state в ImageGallery
+// завершив на передачі шуканого із state в ImageGallery
 
 import { Component } from 'react';
 import { ModalFrame } from './Modal/Modal';
@@ -55,7 +55,7 @@ export class App extends Component {
         <button type="button" onClick={this.toggleModal}>
           Open
         </button>
-        //завершив на передачі шуканого із state в ImageGallery
+        {/* завершив на передачі шуканого із state в ImageGallery */}
         <ImageGallery searchQuery={this.state.queryValue}></ImageGallery>
         {showModal && <ModalFrame></ModalFrame>}
         <NotificationContainer />
