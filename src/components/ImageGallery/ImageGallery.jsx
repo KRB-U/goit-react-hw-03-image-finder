@@ -8,10 +8,10 @@ const ImageGallery = () => {
 
   return (
     <ImageGalleryUl>
-      {this.props.items.map(item => {
+      {/* {this.props.items.map(item => {
         <ImageGalleryItem key={item.id} webformatURL={item.webformatURL} />;
-      })}
-      {/* <ImageGalleryItem></ImageGalleryItem> */}
+      })} */}
+      <ImageGalleryItem></ImageGalleryItem>
     </ImageGalleryUl>
   );
 };

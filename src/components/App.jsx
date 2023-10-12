@@ -33,13 +33,17 @@ export class App extends Component {
   async componentDidUpdate(_, prevState) {
     // this.setState({ loading: true, error: false });
 
-    if (prevState.fetchedImages !== this.state.fetchedImages) {
+    if (
+      prevState.fetchedImages !== this.state.fetchedImages ||
+      prevState.currentPage !== this.state.currentPage
+    ) {
       try {
         const { currentPage, queryValue } = this.state;
 
         const images = await searchItem(currentPage, queryValue);
         console.log(images);
         this.setState({ fetchedImages: images });
+
         // console.log(this.state.fetchedImages);
       } catch (err) {
         this.setState({ error: true });
@@ -76,6 +80,10 @@ export class App extends Component {
   //     showModal: !showModal,
   //   }));
   // };
+
+  handleLoadMore = () => {
+    this.state(prevState => prevState.currentPage + 1);
+  };
 
   render() {
     const { fetchedImages, showModal, loading, error } = this.state;
