@@ -1,17 +1,19 @@
-// import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { Component } from 'react';
+
+import { ImageGalleryUl } from './ImageGallery.styled';
 
 class ImageGallery extends Component {
   render() {
-    console.log(this.props.searchQuery);
+    // console.log(this.props.searchQuery);
 
     return (
-      <ul className="gallery">
+      <ImageGalleryUl className="gallery">
         {/* {searchQuery.map((item, idx) => {
           <ImageGalleryItem key={item.id} webformatURL={item.webformatURL} />;
         })} */}
         <ImageGalleryItem></ImageGalleryItem>
-      </ul>
+      </ImageGalleryUl>
     );
   }
 }

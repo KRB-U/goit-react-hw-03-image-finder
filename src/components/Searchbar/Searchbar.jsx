@@ -1,8 +1,17 @@
 import { Component } from 'react';
+// import { FaBeer } from 'react-icons/fa';
 
 //NOTIFY
-import { NotificationManager } from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
+import toast from 'react-hot-toast';
+
+//CSS
+import {
+  SearchbarStd,
+  SearchForm,
+  SearchFormButton,
+  SearchFormButtonLabel,
+  SearchFormInput,
+} from './Searchbar.styled';
 
 class Searchbar extends Component {
   state = {
@@ -17,7 +26,7 @@ class Searchbar extends Component {
     evt.preventDefault();
 
     if (this.state.queryValue.trim() === '') {
-      return NotificationManager.error('Ведіть пошуковий запит!');
+      return toast.error('Ведіть пошуковий запит!');
     }
 
     this.props.onSubmit(this.state.queryValue);
@@ -26,14 +35,13 @@ class Searchbar extends Component {
 
   render() {
     return (
-      <header className="searchbar">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
-          </button>
+      <SearchbarStd>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchFormButton type="submit">
+            <SearchFormButtonLabel>Search </SearchFormButtonLabel>
+          </SearchFormButton>
 
-          <input
-            className="input"
+          <SearchFormInput
             type="text"
             // autocomplete="off"
             // autofocus
@@ -41,8 +49,8 @@ class Searchbar extends Component {
             onChange={this.handleQuerySearch}
             // value={this.state.queryValue}
           />
-        </form>
-      </header>
+        </SearchForm>
+      </SearchbarStd>
     );
   }
 }
