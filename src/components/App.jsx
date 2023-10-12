@@ -6,6 +6,9 @@ import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
 
+// HELPERS
+import { searchItem } from './helpers/API';
+
 //NOTIFY
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -14,13 +17,22 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export class App extends Component {
   state = {
+    fetchedImages: [],
     showModal: false,
     queryValue: '',
+    currentPage: 1,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
     this.toggleModal();
+
+    try {
+      const { currentPage, queryValue } = this.state;
+
+      const images = await searchItem(currentPage, queryValue);
+      this.setState({ fetchedImages: images });
+    } catch (err) {}
   }
 
   componentWillUnmount() {
@@ -35,6 +47,7 @@ export class App extends Component {
 
   //оновлення state із SearchBar
   handleFormSubmit = queryValue => {
+    console.log(this.state.queryValue);
     this.setState({ queryValue: queryValue });
   };
 

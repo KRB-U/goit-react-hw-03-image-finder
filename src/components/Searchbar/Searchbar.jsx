@@ -1,5 +1,5 @@
 import { Component } from 'react';
-// import { FaBeer } from 'react-icons/fa';
+import { IoMdSearch } from 'react-icons/io';
 
 //NOTIFY
 import toast from 'react-hot-toast';
@@ -15,22 +15,24 @@ import {
 
 class Searchbar extends Component {
   state = {
-    queryValue: '',
+    currentQueryValue: '',
   };
 
   handleQuerySearch = evt => {
-    this.setState({ queryValue: evt.target.value.toLowerCase() });
+    // console.log(evt.target.value.toLowerCase());
+    this.setState({ currentQueryValue: evt.target.value.toLowerCase() });
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
 
-    if (this.state.queryValue.trim() === '') {
+    if (this.state.currentQueryValue.trim() === '') {
       return toast.error('Ведіть пошуковий запит!');
     }
 
-    this.props.onSubmit(this.state.queryValue);
-    this.setState({ queryValue: '' });
+    this.props.onSubmit(this.state.currentQueryValue);
+    console.log(this.state.currentQueryValue);
+    // this.setState({ queryValue: '' });
   };
 
   render() {
@@ -38,7 +40,8 @@ class Searchbar extends Component {
       <SearchbarStd>
         <SearchForm onSubmit={this.handleSubmit}>
           <SearchFormButton type="submit">
-            <SearchFormButtonLabel>Search </SearchFormButtonLabel>
+            <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+            <IoMdSearch />
           </SearchFormButton>
 
           <SearchFormInput
