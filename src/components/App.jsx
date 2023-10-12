@@ -21,34 +21,48 @@ export class App extends Component {
     showModal: false,
     queryValue: '',
     currentPage: 1,
+    loading: false,
+    error: false,
   };
 
-  async componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-    this.toggleModal();
+  // async componentDidMount(_, prevState) {
+  //   // window.addEventListener('keydown', this.handleKeyDown);
+  //   // this.toggleModal();
+  // }
 
-    try {
-      const { currentPage, queryValue } = this.state;
+  async componentDidUpdate(_, prevState) {
+    // this.setState({ loading: true, error: false });
 
-      const images = await searchItem(currentPage, queryValue);
-      this.setState({ fetchedImages: images });
-    } catch (err) {}
-  }
+    if (prevState.fetchedImages !== this.state.fetchedImages) {
+      try {
+        const { currentPage, queryValue } = this.state;
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleBackDropClick = evt => {
-    if (evt.currnetTarget === evt.target) {
-      this.toggleModal();
+        const images = await searchItem(currentPage, queryValue);
+        console.log(images);
+        this.setState({ fetchedImages: images });
+        // console.log(this.state.fetchedImages);
+      } catch (err) {
+        this.setState({ error: true });
+      } finally {
+        this.setState({ loading: false });
+      }
     }
-  };
+  }
+
+  // componentWillUnmount() {
+  //   window.removeEventListener('keydown', this.handleKeyDown);
+  // }
+
+  // handleBackDropClick = evt => {
+  //   if (evt.currnetTarget === evt.target) {
+  //     this.toggleModal();
+  //   }
+  // };
 
   //оновлення state із SearchBar
   handleFormSubmit = queryValue => {
-    console.log(this.state.queryValue);
-    this.setState({ queryValue: queryValue });
+    // console.log(queryValue);
+    this.setState({ queryValue });
   };
 
   handleKeyDown = evt => {
@@ -57,14 +71,14 @@ export class App extends Component {
     }
   };
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
-  };
+  // toggleModal = () => {
+  //   this.setState(({ showModal }) => ({
+  //     showModal: !showModal,
+  //   }));
+  // };
 
   render() {
-    const { showModal } = this.state;
+    const { fetchedImages, showModal, loading, error } = this.state;
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
@@ -73,8 +87,9 @@ export class App extends Component {
           Open
         </button>
         {/* завершив на передачі шуканого із state в ImageGallery */}
-
-        <ImageGallery searchQuery={this.state.queryValue}></ImageGallery>
+        {/* {loading && <p>Loading...</p>} */}
+        {/* {error && <p>We have error</p>} */}
+        <ImageGallery items={fetchedImages}></ImageGallery>
         <BtnLoadMore></BtnLoadMore>
 
         {showModal && <ModalFrame></ModalFrame>}

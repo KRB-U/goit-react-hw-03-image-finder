@@ -31,7 +31,7 @@ class Searchbar extends Component {
     }
 
     this.props.onSubmit(this.state.currentQueryValue);
-    console.log(this.state.currentQueryValue);
+    // console.log(this.state.currentQueryValue);
     // this.setState({ queryValue: '' });
   };
 

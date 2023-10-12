@@ -5,7 +5,7 @@ import {
 
 export const ImageGalleryItem = ({ webformatURL }) => {
   return (
-    <ImageGalleryItemLi className="gallery-item">
+    <ImageGalleryItemLi>
       <ImageGalleryItemImage src={webformatURL} alt="gallery-item" />
     </ImageGalleryItemLi>
   );

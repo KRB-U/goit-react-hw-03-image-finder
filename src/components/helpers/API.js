@@ -13,13 +13,13 @@ const searchItem = async (currentPage, valueInput) => {
     q: valueInput,
     image_type: 'photo',
     orientation: 'horizontal',
-    //   safesearch: 'true',
     page: currentPage,
     per_page: 12,
   });
 
   const response = await axios.get(`${BASE_URL}${searchQueryParams}`);
-  console.log(response.data.hits);
+
+  // console.log(searchQueryParams.get('q'));
 
   return response.data.hits;
 };
