@@ -40,9 +40,19 @@ export class App extends Component {
         this.setState({ loading: true, error: false });
 
         const { currentPage, queryValue } = this.state;
+        //
+        const delayedSearch = () => {
+          return new Promise(resolve => {
+            setTimeout(async () => {
+              const images = await searchItem(currentPage, queryValue);
+              resolve(images);
+            }, 1000);
+          });
+        };
 
-        const images = await searchItem(currentPage, queryValue);
-
+        const images = await delayedSearch();
+        // const images = await searchItem(currentPage, queryValue);
+        //
         this.setState(prevState => ({
           fetchedImages: [...prevState.fetchedImages, ...images.hits],
           loadMore: this.state.currentPage < Math.ceil(images.totalHits / 12),
@@ -124,7 +134,6 @@ export class App extends Component {
           items={fetchedImages}
           onClickImage={this.handleImageClick}
         />
-
         {loadMore && <ButtonLoadMore onClick={this.handleLoadMore} />}
 
         {showModal && (
