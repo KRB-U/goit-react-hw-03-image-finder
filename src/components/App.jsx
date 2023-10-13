@@ -11,7 +11,7 @@ import { searchItem } from './helpers/API';
 import { Toaster } from 'react-hot-toast';
 
 // STYLED
-// import { ContainerApp } from './layer';
+import { ContainerApp } from './Layer/Layer';
 
 export class App extends Component {
   state = {
@@ -90,7 +90,7 @@ export class App extends Component {
   render() {
     const { fetchedImages, showModal, loading, error } = this.state;
     return (
-      <div>
+      <ContainerApp>
         <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
 
         <button type="button" onClick={this.toggleModal}>
@@ -100,7 +100,7 @@ export class App extends Component {
         {loading && <p>Loading...</p>}
         {error && <p>We have error</p>}
 
-        <ImageGallery items={fetchedImages}></ImageGallery>
+        <ImageGallery items={this.state.fetchedImages}></ImageGallery>
 
         {/* кнопку рендерим коли page > 1 або масив > 0 */}
         <BtnLoadMore></BtnLoadMore>
@@ -116,7 +116,7 @@ export class App extends Component {
             },
           }}
         ></Toaster>
-      </div>
+      </ContainerApp>
     );
   }
 }

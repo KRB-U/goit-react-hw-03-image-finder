@@ -3,9 +3,10 @@ import {
   ImageGalleryItemImage,
 } from './ImageGalleryItem.styled';
 
-export const ImageGalleryItem = ({ webformatURL }) => {
+export const ImageGalleryItem = ({ id, webformatURL }) => {
+  console.log(webformatURL);
   return (
-    <ImageGalleryItemLi>
+    <ImageGalleryItemLi key={id}>
       <ImageGalleryItemImage src={webformatURL} alt="gallery-item" />
     </ImageGalleryItemLi>
   );
