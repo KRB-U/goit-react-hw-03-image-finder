@@ -32,7 +32,7 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   async componentDidUpdate(_, prevState) {
@@ -52,8 +52,12 @@ export class App extends Component {
           loadMore: this.state.currentPage < Math.ceil(images.totalHits / 12),
         }));
 
-        if (images.hits.length === 0) {
-          return toast.error('нічого не знайдено!');
+        const amountImg = images.totalHits;
+
+        if (amountImg === 0) {
+          toast.error('нічого не знайдено!');
+        } else {
+          toast.success(`знайдено ${amountImg} результатів`);
         }
       } catch (err) {
         this.setState({ error: true });
@@ -65,7 +69,7 @@ export class App extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   handleFormSubmit = queryValue => {
@@ -125,7 +129,7 @@ export class App extends Component {
             strokeColor="grey"
             strokeWidth="3"
             animationDuration="0.5"
-            width="50"
+            width="70"
             visible={true}
           />
         )}
