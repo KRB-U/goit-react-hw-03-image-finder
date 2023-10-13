@@ -1,5 +1,5 @@
 import { Component } from 'react';
-// import { ModalFrame } from './Modal/Modal';
+import { ModalFrame } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
@@ -77,25 +77,25 @@ export class App extends Component {
     }
   };
 
-  // toggleModal = () => {
-  //   this.setState(({ showModal }) => ({
-  //     showModal: !showModal,
-  //   }));
-  // };
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
 
   handleLoadMore = () => {
     this.state(prevState => prevState.currentPage + 1);
   };
 
   render() {
-    const { fetchedImages, loading, error } = this.state;
+    const { fetchedImages, showModal, loading, error } = this.state;
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
 
-        {/* <button type="button" onClick={this.toggleModal}>
+        <button type="button" onClick={this.toggleModal}>
           Open
-        </button> */}
+        </button>
 
         {loading && <p>Loading...</p>}
         {error && <p>We have error</p>}
@@ -104,7 +104,7 @@ export class App extends Component {
         {/* кнопку рендерим коли page > 1 або масив > 0 */}
         <BtnLoadMore></BtnLoadMore>
 
-        {/* {showModal && <ModalFrame></ModalFrame>} */}
+        {showModal && <ModalFrame></ModalFrame>}
         <Toaster
           toastOptions={{
             className: '',
