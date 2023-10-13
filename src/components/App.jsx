@@ -8,7 +8,7 @@ import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
 import { searchItem } from './helpers/API';
 
 //NOTIFY
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 // STYLED
 import { ContainerApp } from './Layer/Layer';
@@ -46,6 +46,7 @@ export class App extends Component {
         // }
       } catch (err) {
         this.setState({ error: true });
+        toast.error('Помилка');
       } finally {
         this.setState({ loading: false });
       }
