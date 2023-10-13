@@ -39,7 +39,6 @@ export class App extends Component {
         const { currentPage, queryValue } = this.state;
 
         const images = await searchItem(currentPage, queryValue);
-        console.log(images);
         this.setState({ fetchedImages: images });
 
         // if (this.state.fetchedImages.length === 0) {
@@ -100,7 +99,7 @@ export class App extends Component {
         {loading && <p>Loading...</p>}
         {error && <p>We have error</p>}
 
-        <ImageGallery items={this.state.fetchedImages}></ImageGallery>
+        <ImageGallery items={fetchedImages}></ImageGallery>
 
         {/* кнопку рендерим коли page > 1 або масив > 0 */}
         <BtnLoadMore></BtnLoadMore>
