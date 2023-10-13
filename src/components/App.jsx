@@ -31,10 +31,6 @@ export class App extends Component {
     error: false,
   };
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-
   async componentDidUpdate(_, prevState) {
     if (
       prevState.queryValue !== this.state.queryValue ||
@@ -68,10 +64,6 @@ export class App extends Component {
     }
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
   handleFormSubmit = queryValue => {
     this.setState({
       queryValue: queryValue,
@@ -85,12 +77,6 @@ export class App extends Component {
   //     this.toggleModal();
   //   }
   // };
-
-  handleKeyDown = evt => {
-    if (evt.code === 'Escape') {
-      this.toggleModal();
-    }
-  };
 
   toggleModal = () => {
     this.setState(({ showModal }) => ({
