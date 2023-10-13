@@ -31,8 +31,7 @@ class Searchbar extends Component {
     }
 
     this.props.onSubmit(this.state.currentQueryValue);
-    // console.log(this.state.currentQueryValue);
-    // this.setState({ queryValue: '' });
+    this.setState({ currentQueryValue: '' });
   };
 
   render() {
@@ -50,7 +49,7 @@ class Searchbar extends Component {
             // autofocus
             placeholder="Search images and photos"
             onChange={this.handleQuerySearch}
-            // value={this.state.queryValue}
+            value={this.state.currentQueryValue}
           />
         </SearchForm>
       </SearchbarStd>

@@ -147,7 +147,7 @@ export class App extends Component {
         <Toaster
           toastOptions={{
             className: '',
-            duration: 1000,
+            duration: 500,
             style: {
               background: '#363636',
               color: '#fff',
