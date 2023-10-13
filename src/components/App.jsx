@@ -46,6 +46,7 @@ export class App extends Component {
         const { currentPage, queryValue } = this.state;
 
         const images = await searchItem(currentPage, queryValue);
+
         this.setState(prevState => ({
           fetchedImages: [...prevState.fetchedImages, ...images.hits],
           loadMore: this.state.currentPage < Math.ceil(images.totalHits / 12),

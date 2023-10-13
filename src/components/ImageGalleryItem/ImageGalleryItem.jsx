@@ -6,7 +6,6 @@ const ImageGalleryItem = ({ item, onClickImage }) => {
   const sendImage = () => {
     onClickImage(largeImageURL, tags);
   };
-  // console.log(largeImageURL);
 
   return (
     <>
