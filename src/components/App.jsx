@@ -44,7 +44,7 @@ export class App extends Component {
           fetchedImages: [...prevState.fetchedImages, ...images.hits],
         }));
 
-        if (this.state.fetchedImages.length === 0) {
+        if (images.hits.length === 0) {
           return toast.error('нічого не знайдено!');
         }
       } catch (err) {
