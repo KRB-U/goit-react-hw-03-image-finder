@@ -113,7 +113,6 @@ export class App extends Component {
       error,
       largeImageURL,
       tags,
-      currentPage,
       loadMore,
     } = this.state;
 
