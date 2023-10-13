@@ -124,15 +124,7 @@ export class App extends Component {
           items={fetchedImages}
           onClickImage={this.handleImageClick}
         />
-        {loading && (
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="3"
-            animationDuration="0.5"
-            width="70"
-            visible={true}
-          />
-        )}
+
         {loadMore && <ButtonLoadMore onClick={this.handleLoadMore} />}
 
         {showModal && (
