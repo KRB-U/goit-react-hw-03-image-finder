@@ -40,7 +40,8 @@ export class App extends Component {
         const { currentPage, queryValue } = this.state;
 
         const images = await searchItem(currentPage, queryValue);
-        this.setState({ fetchedImages: images });
+        console.log(images);
+        this.setState({ fetchedImages: images.hits });
 
         // if (this.state.fetchedImages.length === 0) {
         //   return toast.error('нічого не знайдено!');
