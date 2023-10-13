@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ModalFrame } from './Modal/Modal';
+// import { ModalFrame } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
@@ -104,7 +104,7 @@ export class App extends Component {
         {/* кнопку рендерим коли page > 1 або масив > 0 */}
         <BtnLoadMore></BtnLoadMore>
 
-        {showModal && <ModalFrame></ModalFrame>}
+        {/* {showModal && <ModalFrame></ModalFrame>} */}
         <Toaster
           toastOptions={{
             className: '',
