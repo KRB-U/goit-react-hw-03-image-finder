@@ -1,4 +1,3 @@
-import Modal from 'react-modal';
 import { Overlay, ImageContainer } from './Modal.styled';
 
 const ModalFrame = () => {

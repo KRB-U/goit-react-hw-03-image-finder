@@ -28,7 +28,7 @@ export class App extends Component {
   //   // this.toggleModal();
   // }
 
-  async componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(_, prevState) {
     if (
       prevState.queryValue !== this.state.queryValue ||
       prevState.currentPage !== this.state.currentPage
