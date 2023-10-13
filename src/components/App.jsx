@@ -8,7 +8,7 @@ import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
 import { searchItem } from './helpers/API';
 
 //NOTIFY
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 // STYLED
 // import { ContainerApp } from './layer';
@@ -88,7 +88,7 @@ export class App extends Component {
   };
 
   render() {
-    const { fetchedImages, showModal, loading, error } = this.state;
+    const { fetchedImages, loading, error } = this.state;
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
@@ -97,8 +97,8 @@ export class App extends Component {
           Open
         </button> */}
 
-        {/* {loading && <p>Loading...</p>} */}
-        {/* {error && <p>We have error</p>} */}
+        {loading && <p>Loading...</p>}
+        {error && <p>We have error</p>}
         <ImageGallery items={fetchedImages}></ImageGallery>
 
         {/* кнопку рендерим коли page > 1 або масив > 0 */}
