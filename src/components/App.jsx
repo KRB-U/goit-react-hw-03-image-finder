@@ -8,7 +8,7 @@ import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
 import { searchItem } from './helpers/API';
 
 //NOTIFY
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 // STYLED
 // import { ContainerApp } from './layer';
