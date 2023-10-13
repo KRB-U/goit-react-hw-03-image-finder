@@ -1,7 +1,8 @@
 import { Component } from 'react';
-import { ModalFrame } from './ModalFrame/ModalFrame';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { ModalFrame } from './ModalFrame/ModalFrame';
+
 import { ButtonLoadMore } from './ButtonLoadMore/ButtonLoadMore';
 
 // HELPERS
@@ -25,9 +26,14 @@ export class App extends Component {
     queryValue: '',
     currentPage: 1,
 
+    loadMore: false,
     loading: false,
     error: false,
   };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
 
   async componentDidUpdate(_, prevState) {
     if (
@@ -42,6 +48,7 @@ export class App extends Component {
         const images = await searchItem(currentPage, queryValue);
         this.setState(prevState => ({
           fetchedImages: [...prevState.fetchedImages, ...images.hits],
+          loadMore: this.state.currentPage < Math.ceil(images.totalHits / 12),
         }));
 
         if (images.hits.length === 0) {
@@ -56,11 +63,9 @@ export class App extends Component {
     }
   }
 
-  // handleBackDropClick = evt => {
-  //   if (evt.currnetTarget === evt.target) {
-  //     this.toggleModal();
-  //   }
-  // };
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
 
   handleFormSubmit = queryValue => {
     this.setState({
@@ -69,6 +74,12 @@ export class App extends Component {
       currentPage: 1,
     });
   };
+
+  // handleBackDropClick = evt => {
+  //   if (evt.currnetTarget === evt.target) {
+  //     this.toggleModal();
+  //   }
+  // };
 
   handleKeyDown = evt => {
     if (evt.code === 'Escape') {
@@ -95,12 +106,20 @@ export class App extends Component {
   };
 
   render() {
-    const { fetchedImages, showModal, loading, error, largeImageURL, tags } =
-      this.state;
+    const {
+      fetchedImages,
+      showModal,
+      loading,
+      error,
+      largeImageURL,
+      tags,
+      currentPage,
+      loadMore,
+    } = this.state;
+
     return (
       <ContainerApp>
         <Searchbar onSubmit={this.handleFormSubmit} />
-
         {loading && (
           <RotatingLines
             strokeColor="grey"
@@ -110,16 +129,13 @@ export class App extends Component {
             visible={true}
           />
         )}
-
         {error && <p>We have error</p>}
-
         <ImageGallery
           items={fetchedImages}
           onClickImage={this.handleImageClick}
         />
 
-        {/* кнопку рендерим коли page > 1 або масив > 0 */}
-        <ButtonLoadMore onClick={this.handleLoadMore} />
+        {loadMore && <ButtonLoadMore onClick={this.handleLoadMore} />}
 
         {showModal && (
           <ModalFrame
@@ -128,7 +144,6 @@ export class App extends Component {
             onClose={this.toggleModal}
           />
         )}
-
         <Toaster
           toastOptions={{
             className: '',
