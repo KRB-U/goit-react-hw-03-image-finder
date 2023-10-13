@@ -1,7 +1,4 @@
-import {
-  ImageGalleryItemLi,
-  ImageGalleryItemImage,
-} from './ImageGalleryItem.styled';
+import { ImageGalleryItemImage } from './ImageGalleryItem.styled';
 
 const ImageGalleryItem = ({ item, onClickImage }) => {
   const { id, webformatURL, largeImageURL, tags } = item;
