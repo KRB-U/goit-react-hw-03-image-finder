@@ -29,11 +29,6 @@ export class App extends Component {
     error: false,
   };
 
-  // async componentDidMount(_, prevState) {
-  //   // window.addEventListener('keydown', this.handleKeyDown);
-  //   // this.toggleModal();
-  // }
-
   async componentDidUpdate(_, prevState) {
     if (
       prevState.queryValue !== this.state.queryValue ||
@@ -45,14 +40,13 @@ export class App extends Component {
         const { currentPage, queryValue } = this.state;
 
         const images = await searchItem(currentPage, queryValue);
-        // console.log(images);
         this.setState(prevState => ({
           fetchedImages: [...prevState.fetchedImages, ...images.hits],
         }));
 
-        // if (this.state.fetchedImages.length === 0) {
-        //   return toast.error('нічого не знайдено!');
-        // }
+        if (this.state.fetchedImages.length === 0) {
+          return toast.error('нічого не знайдено!');
+        }
       } catch (err) {
         this.setState({ error: true });
         toast.error('Помилка');
@@ -61,10 +55,6 @@ export class App extends Component {
       }
     }
   }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener('keydown', this.handleKeyDown);
-  // }
 
   // handleBackDropClick = evt => {
   //   if (evt.currnetTarget === evt.target) {
@@ -120,6 +110,7 @@ export class App extends Component {
             visible={true}
           />
         )}
+
         {error && <p>We have error</p>}
 
         <ImageGallery
@@ -137,6 +128,7 @@ export class App extends Component {
             onClose={this.toggleModal}
           />
         )}
+
         <Toaster
           toastOptions={{
             className: '',
