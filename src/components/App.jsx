@@ -1,7 +1,8 @@
 import { Component } from 'react';
-import { ModalFrame } from './Modal/Modal';
+import { ModalFrame } from './ModalFrame/ModalFrame';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { ButtonLoadMore } from './ButtonLoadMore/ButtonLoadMore';
 
 // HELPERS
 import { searchItem } from '../helpers/API';
@@ -10,16 +11,20 @@ import { searchItem } from '../helpers/API';
 import toast, { Toaster } from 'react-hot-toast';
 
 // STYLED
-import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
 import { ContainerApp } from './Layer/Layer';
 import { RotatingLines } from 'react-loader-spinner';
 
 export class App extends Component {
   state = {
     fetchedImages: [],
+
     showModal: false,
+    largeImageURL: null,
+    tags: null,
+
     queryValue: '',
     currentPage: 1,
+
     loading: false,
     error: false,
   };
@@ -40,8 +45,10 @@ export class App extends Component {
         const { currentPage, queryValue } = this.state;
 
         const images = await searchItem(currentPage, queryValue);
-        console.log(images);
-        this.setState({ fetchedImages: images.hits });
+        // console.log(images);
+        this.setState(prevState => ({
+          fetchedImages: [...prevState.fetchedImages, ...images.hits],
+        }));
 
         // if (this.state.fetchedImages.length === 0) {
         //   return toast.error('нічого не знайдено!');
@@ -71,8 +78,6 @@ export class App extends Component {
       fetchedImages: [],
       currentPage: 1,
     });
-
-    // тре добавити очистку масиву з картинками в стейт при новому пошуку, прокинувши fetchedImages: [] і currentPage: 1
   };
 
   handleKeyDown = evt => {
@@ -87,15 +92,24 @@ export class App extends Component {
     }));
   };
 
+  handleImageClick = (largeImageURL, tags) => {
+    this.setState({
+      largeImageURL: largeImageURL,
+      tags: tags,
+      showModal: true,
+    });
+  };
+
   handleLoadMore = () => {
-    this.state(prevState => prevState.currentPage + 1);
+    this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }));
   };
 
   render() {
-    const { fetchedImages, showModal, loading, error } = this.state;
+    const { fetchedImages, showModal, loading, error, largeImageURL, tags } =
+      this.state;
     return (
       <ContainerApp>
-        <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
+        <Searchbar onSubmit={this.handleFormSubmit} />
 
         {loading && (
           <RotatingLines
@@ -108,12 +122,21 @@ export class App extends Component {
         )}
         {error && <p>We have error</p>}
 
-        <ImageGallery items={fetchedImages}></ImageGallery>
+        <ImageGallery
+          items={fetchedImages}
+          onClickImage={this.handleImageClick}
+        />
 
         {/* кнопку рендерим коли page > 1 або масив > 0 */}
-        <BtnLoadMore></BtnLoadMore>
+        <ButtonLoadMore onClick={this.handleLoadMore} />
 
-        {showModal && <ModalFrame></ModalFrame>}
+        {showModal && (
+          <ModalFrame
+            largeImageURL={largeImageURL}
+            tags={tags}
+            onClose={this.toggleModal}
+          />
+        )}
         <Toaster
           toastOptions={{
             className: '',
@@ -123,7 +146,7 @@ export class App extends Component {
               color: '#fff',
             },
           }}
-        ></Toaster>
+        />
       </ContainerApp>
     );
   }

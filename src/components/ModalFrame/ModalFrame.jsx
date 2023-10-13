@@ -1,12 +1,11 @@
 import { Overlay, ImageContainer } from './Modal.styled';
 
-const ModalFrame = () => {
+const ModalFrame = ({ largeImageURL, tags, onClose }) => {
   return (
     <>
-      <Overlay>
+      <Overlay onClick={onClose}>
         <ImageContainer>
-          {/* {children} */}
-          <img src="" alt="" />
+          <img src={largeImageURL} alt={tags} />
         </ImageContainer>
       </Overlay>
     </>

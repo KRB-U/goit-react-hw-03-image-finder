@@ -3,10 +3,19 @@ import {
   ImageGalleryItemImage,
 } from './ImageGalleryItem.styled';
 
-export const ImageGalleryItem = ({ id, webformatURL }) => {
+const ImageGalleryItem = ({ item, onClickImage }) => {
+  const { id, webformatURL, largeImageURL, tags } = item;
+
+  const sendImage = () => {
+    onClickImage(largeImageURL, tags);
+  };
+  // console.log(largeImageURL);
+
   return (
-    <ImageGalleryItemLi key={id}>
-      <ImageGalleryItemImage src={webformatURL} alt="gallery-item" />
-    </ImageGalleryItemLi>
+    <>
+      <ImageGalleryItemImage src={webformatURL} alt={id} onClick={sendImage} />
+    </>
   );
 };
+
+export { ImageGalleryItem };

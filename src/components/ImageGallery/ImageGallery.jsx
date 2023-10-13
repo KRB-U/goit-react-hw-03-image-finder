@@ -1,16 +1,19 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 
 // STYLED
-import { ImageGalleryUl } from './ImageGallery.styled';
+import { ImageGalleryItemLi, ImageGalleryUl } from './ImageGallery.styled';
 
-const ImageGallery = ({ items }) => {
+const ImageGallery = ({ items, onClickImage }) => {
   return (
     <ImageGalleryUl>
-      {items.map(item => {
-        return (
-          <ImageGalleryItem key={item.id} webformatURL={item.webformatURL} />
-        );
-      })}
+      {items &&
+        items.map(item => {
+          return (
+            <ImageGalleryItemLi key={item.id}>
+              <ImageGalleryItem item={item} onClickImage={onClickImage} />
+            </ImageGalleryItemLi>
+          );
+        })}
     </ImageGalleryUl>
   );
 };
