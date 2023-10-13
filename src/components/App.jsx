@@ -1,5 +1,3 @@
-// завершив на передачі шуканого із state в ImageGallery
-
 import { Component } from 'react';
 import { ModalFrame } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
@@ -30,15 +28,17 @@ export class App extends Component {
   //   // this.toggleModal();
   // }
 
-  async componentDidUpdate(_, prevState) {
-    // this.setState({ loading: true, error: false });
-
+  async componentDidUpdate(prevProps, prevState) {
     if (
-      prevState.fetchedImages !== this.state.fetchedImages ||
+      prevState.queryValue !== this.state.queryValue ||
       prevState.currentPage !== this.state.currentPage
     ) {
+      // this.setState({ loading: true, error: false });
+
       try {
         const { currentPage, queryValue } = this.state;
+
+        // console.log('hbjkgh');
 
         const images = await searchItem(currentPage, queryValue);
         console.log(images);
@@ -66,7 +66,9 @@ export class App extends Component {
   //оновлення state із SearchBar
   handleFormSubmit = queryValue => {
     // console.log(queryValue);
-    this.setState({ queryValue });
+    this.setState({ queryValue: queryValue });
+
+    // тре добавити очистку масиву з картинка в стейт при новому пошуку, прокинувши fetchedImages: [] і currentPage: 1
   };
 
   handleKeyDown = evt => {
@@ -91,13 +93,15 @@ export class App extends Component {
       <div>
         <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
 
-        <button type="button" onClick={this.toggleModal}>
+        {/* <button type="button" onClick={this.toggleModal}>
           Open
-        </button>
-        {/* завершив на передачі шуканого із state в ImageGallery */}
+        </button> */}
+
         {/* {loading && <p>Loading...</p>} */}
         {/* {error && <p>We have error</p>} */}
         <ImageGallery items={fetchedImages}></ImageGallery>
+
+        {/* кнопку рендерим коли page > 1 або масив > 0 */}
         <BtnLoadMore></BtnLoadMore>
 
         {showModal && <ModalFrame></ModalFrame>}
