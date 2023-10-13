@@ -38,16 +38,13 @@ export class App extends Component {
 
         const { currentPage, queryValue } = this.state;
 
-        // console.log('hbjkgh');
-
         const images = await searchItem(currentPage, queryValue);
         console.log(images);
         this.setState({ fetchedImages: images });
 
-        if (this.state.fetchedImages.length === 0) {
-          console.log(this.state.fetchedImages.length);
-          return toast.error('нічого не знайдено!');
-        }
+        // if (this.state.fetchedImages.length === 0) {
+        //   return toast.error('нічого не знайдено!');
+        // }
       } catch (err) {
         this.setState({ error: true });
       } finally {
