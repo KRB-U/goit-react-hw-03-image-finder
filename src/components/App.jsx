@@ -2,7 +2,6 @@ import { Component } from 'react';
 import { ModalFrame } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
-import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
 
 // HELPERS
 import { searchItem } from './helpers/API';
@@ -11,6 +10,7 @@ import { searchItem } from './helpers/API';
 import toast, { Toaster } from 'react-hot-toast';
 
 // STYLED
+import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
 import { ContainerApp } from './Layer/Layer';
 import { RotatingLines } from 'react-loader-spinner';
 
