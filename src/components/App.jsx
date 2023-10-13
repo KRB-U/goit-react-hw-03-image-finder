@@ -8,7 +8,7 @@ import { BtnLoadMore } from './ButtonLoadMore/ButtonLoadMore.styled';
 import { searchItem } from './helpers/API';
 
 //NOTIFY
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 // STYLED
 // import { ContainerApp } from './layer';
@@ -33,9 +33,9 @@ export class App extends Component {
       prevState.queryValue !== this.state.queryValue ||
       prevState.currentPage !== this.state.currentPage
     ) {
-      // this.setState({ loading: true, error: false });
-
       try {
+        this.setState({ loading: true, error: false });
+
         const { currentPage, queryValue } = this.state;
 
         // console.log('hbjkgh');
@@ -44,7 +44,10 @@ export class App extends Component {
         console.log(images);
         this.setState({ fetchedImages: images });
 
-        // console.log(this.state.fetchedImages);
+        if (this.state.fetchedImages.length === 0) {
+          console.log(this.state.fetchedImages.length);
+          return toast.error('нічого не знайдено!');
+        }
       } catch (err) {
         this.setState({ error: true });
       } finally {
@@ -99,6 +102,7 @@ export class App extends Component {
 
         {loading && <p>Loading...</p>}
         {error && <p>We have error</p>}
+
         <ImageGallery items={fetchedImages}></ImageGallery>
 
         {/* кнопку рендерим коли page > 1 або масив > 0 */}
