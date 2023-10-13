@@ -12,6 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 // STYLED
 import { ContainerApp } from './Layer/Layer';
+import { RotatingLines } from 'react-loader-spinner';
 
 export class App extends Component {
   state = {
@@ -63,12 +64,14 @@ export class App extends Component {
   //   }
   // };
 
-  //оновлення state із SearchBar
   handleFormSubmit = queryValue => {
-    // console.log(queryValue);
-    this.setState({ queryValue: queryValue });
+    this.setState({
+      queryValue: queryValue,
+      fetchedImages: [],
+      currentPage: 1,
+    });
 
-    // тре добавити очистку масиву з картинка в стейт при новому пошуку, прокинувши fetchedImages: [] і currentPage: 1
+    // тре добавити очистку масиву з картинками в стейт при новому пошуку, прокинувши fetchedImages: [] і currentPage: 1
   };
 
   handleKeyDown = evt => {
@@ -93,11 +96,15 @@ export class App extends Component {
       <ContainerApp>
         <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
 
-        <button type="button" onClick={this.toggleModal}>
-          Open
-        </button>
-
-        {loading && <p>Loading...</p>}
+        {loading && (
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="3"
+            animationDuration="0.5"
+            width="50"
+            visible={true}
+          />
+        )}
         {error && <p>We have error</p>}
 
         <ImageGallery items={fetchedImages}></ImageGallery>
