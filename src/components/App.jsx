@@ -1,4 +1,5 @@
 import { Component } from 'react';
+// COMPONENT
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ModalFrame } from './ModalFrame/ModalFrame';
