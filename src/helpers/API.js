@@ -14,8 +14,6 @@ axios.defaults.params = {
 const searchItem = async (currentPage, valueInput) => {
   const response = await axios.get(`?q=${valueInput}&page=${currentPage}`);
 
-  // console.log(searchQueryParams.get('q'));
-
   return response.data;
 };
 
