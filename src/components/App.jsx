@@ -72,7 +72,7 @@ export class App extends Component {
         }
       } catch (err) {
         this.setState({ error: true });
-        toast.error('Помилка');
+        toast.error('Щось пішло не так');
       } finally {
         this.setState({ loading: false, showLoadingMore: false });
       }
@@ -130,7 +130,6 @@ export class App extends Component {
       <ContainerApp>
         <Searchbar onSubmit={this.handleFormSubmit} />
         {loading && <RotatingLines />}
-        {error && <p>We have error</p>}
         <ImageGallery
           items={fetchedImages}
           onClickImage={this.handleImageClick}
