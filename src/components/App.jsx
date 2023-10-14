@@ -129,6 +129,7 @@ export class App extends Component {
       <ContainerApp>
         <Searchbar onSubmit={this.handleFormSubmit} />
         {loading && <RotatingLines />}
+
         <ImageGallery
           items={fetchedImages}
           onClickImage={this.handleImageClick}
