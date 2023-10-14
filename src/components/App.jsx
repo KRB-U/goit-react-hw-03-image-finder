@@ -119,7 +119,6 @@ export class App extends Component {
       fetchedImages,
       showModal,
       loading,
-      error,
       largeImageURL,
       tags,
       loadMore,
