@@ -5,7 +5,7 @@ import { ModalFrame } from './ModalFrame/ModalFrame';
 import { ButtonLoadMore } from './ButtonLoadMore/ButtonLoadMore';
 
 // SPINER
-import { RotatingLines } from 'react-loader-spinner';
+import { LoaderSpiner } from './LoaderSpiner/LoaderSpiner';
 
 // HELPERS
 import { searchItem } from '../helpers/API';
@@ -128,13 +128,13 @@ export class App extends Component {
     return (
       <ContainerApp>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {loading && <RotatingLines />}
+        {loading && <LoaderSpiner />}
 
         <ImageGallery
           items={fetchedImages}
           onClickImage={this.handleImageClick}
         />
-        {showLoadingMore && <RotatingLines />}
+        {showLoadingMore && <LoaderSpiner />}
         {loadMore && <ButtonLoadMore onClick={this.handleLoadMore} />}
 
         {showModal && (
