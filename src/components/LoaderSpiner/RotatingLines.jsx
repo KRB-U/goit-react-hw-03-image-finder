@@ -1,16 +1,17 @@
-import { StyledRotatingLines } from './RotatingLines.styled';
+import { CenteredContainer } from './RotatingLines.styled';
+import { RotatingLines } from 'react-loader-spinner';
 
 const RotatingLines = () => {
   return (
-    <div>
-      <StyledRotatingLines
+    <CenteredContainer>
+      <RotatingLines
         strokeColor="grey"
         strokeWidth="3"
         animationDuration="0.5"
         width="70"
         visible={true}
       />
-    </div>
+    </CenteredContainer>
   );
 };
 
