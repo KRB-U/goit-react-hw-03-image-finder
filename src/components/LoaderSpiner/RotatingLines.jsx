@@ -1,8 +1,8 @@
-import { CenteredContainer, StyledRotatingLines } from './RotatingLines.styled';
+import { StyledRotatingLines } from './RotatingLines.styled';
 
 const RotatingLines = () => {
   return (
-    <CenteredContainer>
+    <div>
       <StyledRotatingLines
         strokeColor="grey"
         strokeWidth="3"
@@ -10,7 +10,7 @@ const RotatingLines = () => {
         width="70"
         visible={true}
       />
-    </CenteredContainer>
+    </div>
   );
 };
 

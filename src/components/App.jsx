@@ -44,17 +44,17 @@ export class App extends Component {
       try {
         const { currentPage, queryValue } = this.state;
         // запит із затримкою , впевнитись чи відпрацьовує спінер
-        const delayedSearch = () => {
-          return new Promise(resolve => {
-            setTimeout(async () => {
-              const images = await searchItem(currentPage, queryValue);
-              resolve(images);
-            }, 1000);
-          });
-        };
+        // const delayedSearch = () => {
+        //   return new Promise(resolve => {
+        //     setTimeout(async () => {
+        //       const images = await searchItem(currentPage, queryValue);
+        //       resolve(images);
+        //     }, 1000);
+        //   });
+        // };
 
-        const images = await delayedSearch();
-        // const images = await searchItem(currentPage, queryValue);
+        // const images = await delayedSearch();
+        const images = await searchItem(currentPage, queryValue);
         //
         this.setState(prevState => ({
           fetchedImages: [...prevState.fetchedImages, ...images.hits],
