@@ -2,8 +2,10 @@ import { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ModalFrame } from './ModalFrame/ModalFrame';
-
 import { ButtonLoadMore } from './ButtonLoadMore/ButtonLoadMore';
+
+// SPINER
+import { RotatingLines } from 'react-loader-spinner';
 
 // HELPERS
 import { searchItem } from '../helpers/API';
@@ -13,7 +15,6 @@ import toast, { Toaster } from 'react-hot-toast';
 
 // STYLED
 import { ContainerApp } from './Layer/Layer';
-import { RotatingLines } from 'react-loader-spinner';
 
 export class App extends Component {
   state = {
@@ -26,8 +27,9 @@ export class App extends Component {
     queryValue: '',
     currentPage: 1,
 
-    ranVariable: false,
+    showLoadingMore: false,
     loadMore: false,
+
     loading: false,
     error: false,
   };
@@ -37,22 +39,22 @@ export class App extends Component {
       prevState.queryValue !== this.state.queryValue ||
       prevState.currentPage !== this.state.currentPage
     ) {
-      try {
-        this.setState({ loading: true, error: false, ranVariable: true });
+      this.setState({ loading: true, error: false });
 
+      try {
         const { currentPage, queryValue } = this.state;
         //
-        // const delayedSearch = () => {
-        //   return new Promise(resolve => {
-        //     setTimeout(async () => {
-        //       const images = await searchItem(currentPage, queryValue);
-        //       resolve(images);
-        //     }, 1000);
-        //   });
-        // };
+        const delayedSearch = () => {
+          return new Promise(resolve => {
+            setTimeout(async () => {
+              const images = await searchItem(currentPage, queryValue);
+              resolve(images);
+            }, 1000);
+          });
+        };
 
-        // const images = await delayedSearch();
-        const images = await searchItem(currentPage, queryValue);
+        const images = await delayedSearch();
+        // const images = await searchItem(currentPage, queryValue);
         //
         this.setState(prevState => ({
           fetchedImages: [...prevState.fetchedImages, ...images.hits],
@@ -63,14 +65,16 @@ export class App extends Component {
 
         if (amountImg === 0) {
           toast.error('нічого не знайдено!');
-        } else {
+        }
+
+        if (amountImg > 1 && currentPage === 1) {
           toast.success(`знайдено ${amountImg} результатів`);
         }
       } catch (err) {
         this.setState({ error: true });
         toast.error('Помилка');
       } finally {
-        this.setState({ loading: false, ranVariable: false });
+        this.setState({ loading: false, showLoadingMore: false });
       }
     }
   }
@@ -104,7 +108,10 @@ export class App extends Component {
   };
 
   handleLoadMore = () => {
-    this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }));
+    this.setState(prevState => ({
+      currentPage: prevState.currentPage + 1,
+      showLoadingMore: true,
+    }));
   };
 
   render() {
@@ -116,37 +123,19 @@ export class App extends Component {
       largeImageURL,
       tags,
       loadMore,
-      ranVariable,
+      showLoadingMore,
     } = this.state;
 
     return (
       <ContainerApp>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {loading && (
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="3"
-            animationDuration="0.5"
-            width="70"
-            visible={true}
-          />
-        )}
+        {loading && <RotatingLines />}
         {error && <p>We have error</p>}
         <ImageGallery
           items={fetchedImages}
           onClickImage={this.handleImageClick}
         />
-
-        {ranVariable && (
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="3"
-            animationDuration="0.5"
-            width="70"
-            visible={true}
-          />
-        )}
-
+        {showLoadingMore && <RotatingLines />}
         {loadMore && <ButtonLoadMore onClick={this.handleLoadMore} />}
 
         {showModal && (
