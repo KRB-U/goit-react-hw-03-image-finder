@@ -19,7 +19,6 @@ class Searchbar extends Component {
   };
 
   handleQuerySearch = evt => {
-    // console.log(evt.target.value.toLowerCase());
     this.setState({ currentQueryValue: evt.target.value.toLowerCase() });
   };
 
@@ -32,6 +31,7 @@ class Searchbar extends Component {
 
     this.props.onSubmit(this.state.currentQueryValue);
     this.setState({ currentQueryValue: '' });
+    // evt.target.reset();
   };
 
   render() {
