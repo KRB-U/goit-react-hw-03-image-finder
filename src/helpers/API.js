@@ -1,6 +1,3 @@
-// https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12
-// 39964073-185c2139e5f09a7ca52633e4a
-
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
