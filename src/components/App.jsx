@@ -26,6 +26,7 @@ export class App extends Component {
     queryValue: '',
     currentPage: 1,
 
+    ranVariable: false,
     loadMore: false,
     loading: false,
     error: false,
@@ -37,7 +38,7 @@ export class App extends Component {
       prevState.currentPage !== this.state.currentPage
     ) {
       try {
-        this.setState({ loading: true, error: false });
+        this.setState({ loading: true, error: false, ranVariable: true });
 
         const { currentPage, queryValue } = this.state;
         //
@@ -69,7 +70,7 @@ export class App extends Component {
         this.setState({ error: true });
         toast.error('Помилка');
       } finally {
-        this.setState({ loading: false });
+        this.setState({ loading: false, ranVariable: false });
       }
     }
   }
@@ -115,6 +116,7 @@ export class App extends Component {
       largeImageURL,
       tags,
       loadMore,
+      ranVariable,
     } = this.state;
 
     return (
@@ -134,6 +136,17 @@ export class App extends Component {
           items={fetchedImages}
           onClickImage={this.handleImageClick}
         />
+
+        {ranVariable && (
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="3"
+            animationDuration="0.5"
+            width="70"
+            visible={true}
+          />
+        )}
+
         {loadMore && <ButtonLoadMore onClick={this.handleLoadMore} />}
 
         {showModal && (
