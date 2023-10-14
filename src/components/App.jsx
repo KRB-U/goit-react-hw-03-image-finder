@@ -40,9 +40,9 @@ export class App extends Component {
       prevState.currentPage !== this.state.currentPage
     ) {
       this.setState({ loading: true, error: false });
+      const { currentPage, queryValue } = this.state;
 
       try {
-        const { currentPage, queryValue } = this.state;
         // запит із затримкою , впевнитись чи відпрацьовує спінер
         // const delayedSearch = () => {
         //   return new Promise(resolve => {
@@ -58,7 +58,7 @@ export class App extends Component {
         //
         this.setState(prevState => ({
           fetchedImages: [...prevState.fetchedImages, ...images.hits],
-          loadMore: this.state.currentPage < Math.ceil(images.totalHits / 12),
+          loadMore: currentPage < Math.ceil(images.totalHits / 12),
         }));
 
         const amountImg = images.totalHits;
