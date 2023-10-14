@@ -43,7 +43,7 @@ export class App extends Component {
 
       try {
         const { currentPage, queryValue } = this.state;
-        //
+        // запит із затримкою , впевнитись чи відпрацьовує спінер
         const delayedSearch = () => {
           return new Promise(resolve => {
             setTimeout(async () => {
