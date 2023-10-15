@@ -41,6 +41,7 @@ export class App extends Component {
       prevState.currentPage !== this.state.currentPage
     ) {
       this.setState({ loading: true, error: false });
+
       const { currentPage, queryValue } = this.state;
 
       try {
